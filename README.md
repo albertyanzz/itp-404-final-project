@@ -1,1 +1,3 @@
-# itp-404-final-project
+## ITP-404 final project
+
+# Planner
