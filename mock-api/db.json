@@ -1,0 +1,12 @@
+{
+    "achievements": [
+      {
+        "name": "Task Mini-Streak",
+        "description": "Complete microtasks for 3 days in a row"
+      },
+      {
+        "name": "Task Novice",
+        "description": "Complete 5 tasks"
+      }
+    ]
+  }

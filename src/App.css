@@ -1,3 +1,64 @@
+
+body {
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: beige;
+}
+
+.homeFont {
+  font-family: Verdana, Geneva, sans-serif;
+  font-weight: 1000;
+  font-size: xx-large;
+  color: white;
+  text-shadow: 0 0 5px black;
+}
+
+.homeContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 16%;
+  padding: 5px;
+}
+
+.homeItem {
+  margin: 10px;
+}
+
+.taskContainer {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-left: 10%;
+}
+
+.taskTitle {
+  font-family: Verdana, Geneva, sans-serif;
+  font-weight: 1000;
+  font-size: xx-large;
+  color: Black;
+}
+
+.taskRow {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+}
+
+.taskCount {
+  margin-right: 10px;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal {
+  overflow-y:auto;
+}
+
 .App {
   text-align: center;
 }
