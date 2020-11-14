@@ -23,7 +23,6 @@ function App() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    // console.log("hey there");
     Promise.all([
       fetchAchievements(),
       fetchCategories(),
@@ -49,8 +48,11 @@ function App() {
         userId,
         setUserId,
         tasks,
+        setTasks,
         subtasks,
+        setSubtasks,
         categories,
+        setCategories,
         achievements
       }}
     >

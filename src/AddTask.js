@@ -1,29 +1,66 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import AddCategoryModal from './AddCategoryModal';
+import { DataStoreContext } from "./contexts";
+import { saveTask, saveSubtask, saveCategory, fetchCategories, fetchTasks, fetchSubtasks } from './api';
+import { useHistory } from "react-router-dom";
+
 
 export default function AddTask(){
 
 	const [name, setName] = useState("");
+	const history = useHistory();
 	const [selectedCategory, setSelectedCategory] = useState("DEFAULT");
 	const [categoryModalOpen, setCategoryModalOpen] = useState(false);
-	const [categories, setCategories] = useState([]);
 	const [deadline, setDeadline] = useState("");
 	const [subtask, setSubtask] = useState("");
-	const [subtasks, setSubtasks] = useState([]);
+	const [newSubtasks, setNewSubtasks] = useState([]);
 	const [selectedSubtask, setSelectedSubtask] = useState("");
+	const { isLoggedIn, categories, setCategories, userId, setSubtasks, setTasks } = useContext(DataStoreContext);
 
 	function hideCategoryModal(){
 		setCategoryModalOpen(false);
 	}
 
-	function handleSubmit(event) {
+	async function handleSubmit(event) {
 		event.preventDefault();
+
+		const newTask = {
+			user_id: userId,
+			task_name: name,
+			deadline: deadline,
+			progress: 0,
+			total: newSubtasks.length,
+			category_id: selectedCategory,
+		}
+
+		const newTaskId = await saveTask(newTask).then((data) => {
+			return data.id;
+		});
+		
+		var a_subtask;
+		for(a_subtask of newSubtasks){
+			const newSubtask = {
+				task_id: newTaskId,
+				subtask_name: a_subtask.name,
+			};
+
+			saveSubtask(newSubtask);
+		}
+
+		fetchTasks().then((data) => {
+			setTasks(data);
+		});
+
+		fetchSubtasks().then((data) => {
+			setSubtasks(data);
+		})
 
 		setName("");
 		setSelectedCategory(0);
 		setDeadline("");
 		setSubtask("");
-		setSubtasks([]);
+		setNewSubtasks([]);
+		history.push("/tasks");
 	}
 
 	function handleNameChange(event) {
@@ -55,27 +92,40 @@ export default function AddTask(){
 
 	function addNewCategory(newCategory) {
 		const cat = {
-			name: newCategory,
-			id: categories.length,
+			category_name: newCategory,
+			user_id: userId,
 		}
-		setCategories(categories.concat([cat]));
-		setSelectedCategory(cat.id);
+
+		const searchCategory = categories.find((category) => {
+			return category.category_name === newCategory;
+		})
+		if(searchCategory){
+			setSelectedCategory(searchCategory.id);
+			setCategoryModalOpen(false);
+			return; // No need to add existing category
+		}
+
+		saveCategory(cat).then(() => {
+			return fetchCategories();
+		}).then((data) => {
+			setCategories(data);
+		});
+		setSelectedCategory(categories.length+1);
 		setCategoryModalOpen(false);
 	}
 
 	function addSubtask(){
 		const task = {
 			name: subtask,
-			id: subtasks.length,
 		}
-		setSubtasks(subtasks.concat([task]));
+		setNewSubtasks(newSubtasks.concat([task]));
 		setSubtask("");
 	}
 
 	function removeSubtask(event){
 		event.preventDefault();
 
-		setSubtasks(subtasks.filter((subtask) => {
+		setNewSubtasks(newSubtasks.filter((subtask) => {
 			return subtask.id !== selectedSubtask;
 		}))
 	}
@@ -89,24 +139,17 @@ export default function AddTask(){
 
 	useEffect(() => {
 		document.title = "Add Tasks | Microplanner"
-	
-		const testCategories = [
-			{
-				name: "School",
-				id: 0,
-			},
-			{
-				name: "Work",
-				id: 1,
-			},
-			{
-				name: "Club",
-				id: 2,
-			}
-			
-		];
-		setCategories(testCategories);
 	}, []);
+
+	if(!isLoggedIn){
+		return (
+			<div className="justify-content-center">
+			  <div className="row centerTitle" id="achievementTitle">
+				Sign in to add a task!
+			  </div>
+			</div>
+		)
+	}
 
 	return(
 		<div style={{marginTop: "10%"}}>
@@ -135,7 +178,7 @@ export default function AddTask(){
 							{categories.map((category) => {
 								return (
 									<option key={category.id} value={category.id}>
-										{category.name}
+										{category.category_name}
 									</option>
 								)
 							})}
@@ -165,7 +208,7 @@ export default function AddTask(){
 							style={{width: "100%"}}
 							onChange={handleSelectedSubtaskChange}
 						>
-							{subtasks.map((subtask) => {
+							{newSubtasks.map((subtask) => {
 								return (
 									<option key={subtask.id} value={subtask.id}>
 										{subtask.name}

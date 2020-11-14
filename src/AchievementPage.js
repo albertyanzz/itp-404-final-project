@@ -6,12 +6,12 @@ import { faTrophy } from "@fortawesome/free-solid-svg-icons";
 
 export default function AchievementPage(){
     const { isLoggedIn, achievements, userId } = useContext(DataStoreContext);
-    const [userAchievements, setUserAchievements] = useState();
+    const [userAchievements, setUserAchievements] = useState({tasks_completed: "0"});
 
     useEffect(() => {
       document.title = "Achievements | Microplanner";
       const userAchievements = achievements.find((achievement) => {
-        return achievement.userId === userId;
+        return achievement.user_id === userId;
       });
 
       setUserAchievements(userAchievements);
@@ -30,7 +30,7 @@ export default function AchievementPage(){
                     backgroundColor="red"
                     name="Task streak"
                     maxProgress="10"
-                    progress="2"
+                    progress={userAchievements.tasks_completed}
                 >
                     {"Complete 10 tasks"}
                 </AchievementItem>

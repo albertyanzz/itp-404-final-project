@@ -1,17 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SubTasks from './SubTasks';
 import ProgressBar from './ProgressBar';
 
 
-export default function TaskItem({name, maxProgress, progress, dueDate}){
+export default function TaskItem({name, maxProgress, progress, dueDate, subtasks}){
 
 	const [showSubTask, setShowSubTask] = useState(false);
+	const [taskSubtasks, setTaskSubtasks] = useState([]);
 
 	function toggleSubTask(){
 		setShowSubTask(!showSubTask);
 	}
+
+	useEffect(() => {
+		setTaskSubtasks([]);
+		for(const[index, value] of subtasks.entries()){
+			setTaskSubtasks((taskSubtasks) => [
+				...taskSubtasks,
+				<SubTasks key={index} name={value.subtask_name}></SubTasks>,
+      		]);
+		}
+	}, [subtasks]);
 
 	return (
 		<div className="taskBackdrop">
@@ -42,9 +53,7 @@ export default function TaskItem({name, maxProgress, progress, dueDate}){
 				</div>
 
 			</div>
-			{showSubTask && 
-				<SubTasks></SubTasks>
-			}
+			{showSubTask && taskSubtasks}
 		</div>
 	
   	);
