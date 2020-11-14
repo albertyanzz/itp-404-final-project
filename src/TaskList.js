@@ -8,11 +8,11 @@ export default function TaskList(){
 	  }, [])
 
 	return(
-		<div className="taskContainer">
+		<div>
 			<div className="row topTitle" id="taskTitle">
 				Tasks
 			</div>
-			<div className="row">
+			<div className="taskContainer">
 				<TaskItem></TaskItem>
 			</div>
 		</div>

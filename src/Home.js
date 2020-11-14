@@ -15,6 +15,8 @@ export default function Home(){
 	
 
 	useEffect(() => {
+		document.title = "Home | Microplanner"
+
 		function handleLogout() {
 			setIsLoggedIn(false);
 			setCurrUser(null);
@@ -62,9 +64,11 @@ export default function Home(){
 				Microplanner
 			</div>
 			<div className="row homeItem">
-				<Link to="/tasks" className="btn btn-light">
-					Use as Guest
-				</Link>
+				{ !isLoggedIn &&
+					<Link to="/tasks" className="btn btn-light">
+						Use as Guest
+					</Link>
+				}
 			</div>
 			<div id="googleButton">
 			</div>

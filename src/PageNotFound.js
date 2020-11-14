@@ -3,8 +3,8 @@ import React from "react";
 export default function PageNotFound(){
 
     return(
-        <div>
-            Page Not Found
+        <div className="centerTitle">
+            404: Page Not Found
         </div>
     )
 }

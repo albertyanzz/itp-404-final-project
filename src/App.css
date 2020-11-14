@@ -27,18 +27,13 @@ body {
   margin: 10px;
 }
 
-.taskContainer {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  margin-left: 10%;
-}
 
 .topTitle {
   font-family: Verdana, Geneva, sans-serif;
   font-weight: 1000;
   font-size: xx-large;
   color: Black;
+  padding-left: 100px;
 }
 
 .taskRow {
@@ -48,14 +43,23 @@ body {
 }
 
 .taskCount {
-  margin-right: 10px;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-weight: bolder;
 }
 
-.achievementContainer {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  margin-left: 10%;
+.taskCategory {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-left: 10px;
+  font-weight: bold;
+  background-color:white;
+  border-radius: 10px;
+  line-height: 40px;
+  text-align: center;
+  width: 30%;
+  margin-left: 50px;
+  padding: 5px;
 }
 
 .centerTitle {
@@ -68,7 +72,8 @@ body {
 }
 
 .taskContainer {
-  margin-top: 10%;
+  margin-left: 10%;
+  margin-top: 50px;
 }
 
 body.modal-open {
@@ -92,10 +97,11 @@ body.modal-open {
 .menuButton {
   text-align: center;
   width: 80px;
-  line-height: 80px;
+  height: 80px;
   padding: 0px;
   margin-top: 15px;
   margin-bottom: 15px;
+  padding-top: 25px;
 }
 
 .menuItem {
@@ -123,6 +129,40 @@ body.modal-open {
 .welcomeText {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin-top: 30px;
+}
+
+.achievementsList {
+  margin-top: 50px;
+  margin-left: 100px;
+}
+
+.achievementItem {
+  display: flex;
+  flex-direction: row;
+}
+
+.achievementIcon {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.achievementDescription {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-left: 10px;
+  font-weight: bold;
+  background-color:white;
+  border-radius: 10px;
+  line-height: 40px;
+  text-align: center;
+  width: 50%;
+  margin-left: 50px;
+  padding: 5px;
+}
+
+.progressBar {
+  margin-left: 50px;
 }
 
 .App {

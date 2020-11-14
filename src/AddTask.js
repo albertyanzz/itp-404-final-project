@@ -189,10 +189,12 @@ export default function AddTask(){
 							id="deadline">
 						</input>	
 					</div>
-					<div className="form-group col-sm-2">
+				</div>
+				<div className="row justify-content-center">
+					<div className="form-group col-sm-2" style={{marginTop: "100px"}}>
 						<button type="submit" className="btn btn-primary" disabled={!fieldsFilled()}>
-        			Save
-     	 			</button>
+        					Save
+     	 				</button>
 					</div>
 				</div>
 			</form>

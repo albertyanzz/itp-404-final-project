@@ -10,11 +10,11 @@ export default function PopUpMenu(){
     return createPortal(
       <motion.div 
         className="popUpMenu"
-        initial={{ x: 0}}
+        initial={{ x: -130}}
         whileHover={{
-            x: -40
+            x: -60
         }}
-        style={{width: "120%", paddingLeft: "20px"}}
+        style={{width: "120%", paddingLeft: "40px"}}
       >
         <MenuItem
           iconColor="white"
