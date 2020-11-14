@@ -23,6 +23,7 @@ export default function AddTask(){
 		setSelectedCategory(0);
 		setDeadline("");
 		setSubtask("");
+		setSubtasks([]);
 	}
 
 	function handleNameChange(event) {
@@ -71,7 +72,9 @@ export default function AddTask(){
 		setSubtask("");
 	}
 
-	function removeSubtask(){
+	function removeSubtask(event){
+		event.preventDefault();
+
 		setSubtasks(subtasks.filter((subtask) => {
 			return subtask.id !== selectedSubtask;
 		}))
@@ -85,6 +88,8 @@ export default function AddTask(){
 	}
 
 	useEffect(() => {
+		document.title = "Add Tasks | Microplanner"
+	
 		const testCategories = [
 			{
 				name: "School",

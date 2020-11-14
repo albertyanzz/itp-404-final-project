@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TaskItem from './TaskItem';
 
 export default function TaskList(){
+
+	useEffect(() => {
+		document.title = "Tasks | Microplanner"
+	  }, [])
 
 	return(
 		<div className="taskContainer">

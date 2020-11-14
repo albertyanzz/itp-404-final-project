@@ -6,7 +6,7 @@ export default function TaskItem(){
 	return(
 		<div className="taskRow">
 			<div className="taskCount">
-				10
+				<div className="circleTag">30</div>
 			</div>
 			<div className="taskCategory">
 				School
