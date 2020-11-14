@@ -34,7 +34,7 @@ body {
   margin-left: 10%;
 }
 
-.taskTitle {
+.topTitle {
   font-family: Verdana, Geneva, sans-serif;
   font-weight: 1000;
   font-size: xx-large;
@@ -49,6 +49,26 @@ body {
 
 .taskCount {
   margin-right: 10px;
+}
+
+.achievementContainer {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-left: 10%;
+}
+
+.centerTitle {
+  font-family: Verdana, Geneva, sans-serif;
+  justify-content: center;
+  margin-top: 20%;
+  font-weight: 1000;
+  font-size: xx-large;
+  color: Black;
+}
+
+.taskContainer {
+  margin-top: 10%;
 }
 
 body.modal-open {
@@ -87,6 +107,11 @@ body.modal-open {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin-left: 10px;
   font-weight: bold;
+  background-color:white;
+  border-radius: 10px;
+  line-height: 40px;
+  text-align: center;
+  padding: 5px;
 }
 
 .menu {

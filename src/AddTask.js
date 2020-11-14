@@ -109,7 +109,7 @@ export default function AddTask(){
 	}, []);
 
 	return(
-		<div>
+		<div style={{marginTop: "10%"}}>
 			{categoryModalOpen && <AddCategoryModal onClose={hideCategoryModal} saveCategory={addNewCategory}></AddCategoryModal>}
 			<form onSubmit={handleSubmit}>
 				<div className="row justify-content-around">

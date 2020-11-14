@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
+import { DataStoreContext } from "./contexts";
 
 export default function AchievementPage(){
+    const { isLoggedIn } = useContext(DataStoreContext);
 
-    return(
-        <div>
-            Achievement page
-        </div>
-    )
+    if(isLoggedIn) {
+        return (
+            <div className="achievementsContainer">
+                <div className="row topTitle" id="achievementTitle">
+                    Achievements
+                </div>
+		    </div>
+        )
+    }
+
+    else {
+        return (
+        <div className="achievementsContainer">
+			<div className="row centerTitle" id="achievementTitle">
+				Sign in to see achievements!
+			</div>
+		</div>
+        )
+    }
 }

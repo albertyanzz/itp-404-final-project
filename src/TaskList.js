@@ -9,7 +9,7 @@ export default function TaskList(){
 
 	return(
 		<div className="taskContainer">
-			<div className="row taskTitle" id="taskTitle">
+			<div className="row topTitle" id="taskTitle">
 				Tasks
 			</div>
 			<div className="row">

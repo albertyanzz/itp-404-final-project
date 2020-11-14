@@ -8,7 +8,14 @@ import { motion } from 'framer-motion';
 export default function PopUpMenu(){
 
     return createPortal(
-      <motion.div className="popUpMenu">
+      <motion.div 
+        className="popUpMenu"
+        initial={{ x: 0}}
+        whileHover={{
+            x: -40
+        }}
+        style={{width: "120%", paddingLeft: "20px"}}
+      >
         <MenuItem
           iconColor="white"
           icon={faListUl}
