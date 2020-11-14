@@ -1,28 +1,51 @@
-import React from "react";
-import TaskMenu from './TaskMenu';
+import React, { useState } from "react";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SubTasks from './SubTasks';
+import ProgressBar from './ProgressBar';
 
-export default function TaskItem(){
+
+export default function TaskItem({name, maxProgress, progress, dueDate}){
+
+	const [showSubTask, setShowSubTask] = useState(false);
+
+	function toggleSubTask(){
+		setShowSubTask(!showSubTask);
+	}
 
 	return (
-    <div className="taskRow">
-      <div className={`taskCount w3-circle w3-red`}>10</div>
-      <button
-        className="taskCategory w3-button"
-        data-toggle="collapse"
-        data-target="#collapseExample"
-        aria-expanded="false"
-        aria-controls="collapseExample"
-      >
-        School
-      </button>
-	  <div class="collapse" id="collapseExample">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+		<div className="taskBackdrop">
+			<div className="taskName">
+				<div>
+					{name}
+					<br></br>
+					{`Due: ${dueDate}`}
+				</div>
+				<div className="progressBar">
+					<ProgressBar totalValue={maxProgress} currValue={progress}>
+						{
+							element => {
+							if (element)
+								element.style.setProperty(
+								"background-color",
+								maxProgress === progress ? "#09de1b" : "#32a8a8" ,
+								"important"
+								);
+							}
+						}
+					</ProgressBar>
+            	</div>
+				<div>
+					<div className="w3-button w3-circle" onClick={toggleSubTask}>
+						<FontAwesomeIcon icon={showSubTask ? faChevronUp : faChevronDown} color="black" size="2x" />
+					</div>
+				</div>
+
+			</div>
+			{showSubTask && 
+				<SubTasks></SubTasks>
+			}
 		</div>
-	  </div>
-      <div>
-        <TaskMenu></TaskMenu>
-      </div>
-    </div>
-  );
+	
+  	);
 }

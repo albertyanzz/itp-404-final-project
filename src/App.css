@@ -40,6 +40,8 @@ body {
   display: flex;
   flex-direction: row;
   margin-left: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .taskCount {
@@ -57,9 +59,49 @@ body {
   border-radius: 10px;
   line-height: 40px;
   text-align: center;
-  width: 30%;
+  width: 70%;
   margin-left: 50px;
   padding: 5px;
+}
+
+.taskContainer {
+  width: 90%;
+}
+
+.taskItem {
+  width: 50%;
+  margin-left: 50px;
+  padding: 10px;
+}
+
+.taskItemList {
+  background-color: white;
+  border-radius: 30px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 50px;
+}
+
+.taskName {
+  font-family: Verdana, Geneva, sans-serif;
+  justify-content: center;
+  font-weight: 100;
+  font-size: medium;
+  color: Black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.taskBackdrop {
+  background-color: white;
+  border-radius: 30px;
+  padding: 20px;
+  margin-top: 10px;
 }
 
 .centerTitle {
