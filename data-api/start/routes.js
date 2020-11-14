@@ -17,3 +17,14 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome')
+
+Route.group(() => {
+    Route.resource('subtasks', 'SubtaskController').apiOnly()
+    Route.resource('tasks', 'TaskController').apiOnly()
+    Route.resource('achievements', 'AchievementController').apiOnly()
+    Route.resource('categories', 'CategoryController').apiOnly()
+    Route.post('users', 'UserController.store')
+    Route.post('login', 'UserController.login')
+    Route.post('logout', 'UserController.logout')
+    Route.get('user', 'UserController.show')
+}).prefix('api')

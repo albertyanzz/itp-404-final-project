@@ -1,15 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AchievementItem from './AchievementItem';
 import { DataStoreContext } from "./contexts";
 import { faTrophy } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function AchievementPage(){
-    const { isLoggedIn } = useContext(DataStoreContext);
+    const { isLoggedIn, achievements, userId } = useContext(DataStoreContext);
+    const [userAchievements, setUserAchievements] = useState();
 
     useEffect(() => {
-		document.title = "Achievements | Microplanner"
-	}, [])
+      document.title = "Achievements | Microplanner";
+      const userAchievements = achievements.find((achievement) => {
+        return achievement.userId === userId;
+      });
+
+      setUserAchievements(userAchievements);
+	  }, [achievements, userId])
 
     if(isLoggedIn) {
         return (
@@ -34,12 +40,12 @@ export default function AchievementPage(){
     }
 
     else {
-        return (
+      return (
         <div className="justify-content-center">
-			<div className="row centerTitle" id="achievementTitle">
-				Sign in to see achievements!
-			</div>
-		</div>
-        )
+          <div className="row centerTitle" id="achievementTitle">
+            Sign in to see achievements!
+          </div>
+		    </div>
+      )
     }
 }

@@ -25,8 +25,8 @@ export default function TaskList(){
 			</div>
 			<div className="row">
 				<div className="col col-md-4 taskContainer">
-					<TaskCategory name="School" count="10" id="0"></TaskCategory>
-					<TaskCategory name="Work" count="5" id="1"></TaskCategory>
+					<TaskCategory name="School" count="10" id="0" toggleCategory={toggleCategory}></TaskCategory>
+					<TaskCategory name="Work" count="5" id="1" toggleCategory={toggleCategory}></TaskCategory>
 					<TaskCategory name="Work" count="5" id="2" toggleCategory={toggleCategory}></TaskCategory>
 				</div>
 				<div className="col col-md-6 taskItem">
