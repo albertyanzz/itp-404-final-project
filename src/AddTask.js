@@ -117,6 +117,7 @@ export default function AddTask(){
 	function addSubtask(){
 		const task = {
 			name: subtask,
+			id: newSubtasks.length,
 		}
 		setNewSubtasks(newSubtasks.concat([task]));
 		setSubtask("");
