@@ -95,6 +95,11 @@ body.modal-open {
   left: 5%;
 }
 
+.welcomeText {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-top: 30px;
+}
+
 .App {
   text-align: center;
 }

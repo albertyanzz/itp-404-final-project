@@ -1,13 +1,14 @@
 import React from "react";
 import MenuItem from './MenuItem';
 import { createPortal } from "react-dom";
-import { faMedal, faListUl, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faMedal, faListUl, faPlus, faHome } from "@fortawesome/free-solid-svg-icons";
+import { motion } from 'framer-motion';
 
 
 export default function PopUpMenu(){
 
     return createPortal(
-      <div className="popUpMenu">
+      <motion.div className="popUpMenu">
         <MenuItem
           iconColor="white"
           icon={faListUl}
@@ -29,7 +30,14 @@ export default function PopUpMenu(){
           linkTo="/addtask"
           tag="Add Task"
         ></MenuItem>
-      </div>,
+        <MenuItem
+          iconColor="white"
+          icon={faHome}
+          backgroundColor="green"
+          linkTo="/"
+          tag="Home"
+        ></MenuItem>
+      </motion.div>,
       document.getElementById("menu")
     );
 }

@@ -7,7 +7,7 @@ import { DataStoreContext } from "./contexts";
 
 
 export default function Home(){
-	const { isLoggedIn, setIsLoggedIn, setCurrUser } = useContext(DataStoreContext);
+	const { isLoggedIn, setIsLoggedIn, setCurrUser, userName, setUserName } = useContext(DataStoreContext);
 
 	const responseGoogle = (response) => {
 		console.log(response);
@@ -30,6 +30,7 @@ export default function Home(){
 
 			setIsLoggedIn(true);
 			setCurrUser(id_token);
+			setUserName(profile.getGivenName());
 		}
 
 
@@ -53,7 +54,7 @@ export default function Home(){
 			),
 			document.getElementById('googleButton')
 		  );
-	}, [setIsLoggedIn, isLoggedIn, setCurrUser]);
+	}, [setIsLoggedIn, isLoggedIn, setCurrUser, setUserName]);
 
 	return(
 		<div className="homeContainer">
@@ -66,6 +67,9 @@ export default function Home(){
 				</Link>
 			</div>
 			<div id="googleButton">
+			</div>
+			<div className="welcomeText">
+				{isLoggedIn && `Welcome, ${userName}!`}
 			</div>
 		</div>
 	)
