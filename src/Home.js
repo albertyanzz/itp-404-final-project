@@ -4,8 +4,12 @@ import ReactDOM from 'react-dom';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { DataStoreContext } from "./contexts";
 import { fetchUsers, saveAchievement, saveUser } from './api';
+import dotenv from 'dotenv';
+
 
 export default function Home(){
+	dotenv.config();
+
 	const {
 		isLoggedIn,
 		setIsLoggedIn,
