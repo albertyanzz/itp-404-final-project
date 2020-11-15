@@ -7,7 +7,6 @@ export default function SubTasks({name, id, taskId, removeSubtask}){
     const [taskCompleted, setTaskCompleted] = useState(false);
 
     async function completeTask(){
-        console.log("completed " + name);
         setTaskCompleted(true);
 
         removeSubtask(id, taskId);
@@ -18,17 +17,16 @@ export default function SubTasks({name, id, taskId, removeSubtask}){
     }, [])
 
 	return (
-        
+        !taskCompleted &&
 
         <div className="taskItemList">
 		    <div>
             {name}
         </div>
-        {!taskCompleted && 
+        
         <div className="w3-button" onClick={completeTask}>
             <FontAwesomeIcon icon={faCheckSquare} color="black" size="2x" />
         </div>
-        }
     </div>
   );
 }

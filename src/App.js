@@ -62,7 +62,7 @@ function App() {
 			}))
 		}
 		else {
-			saveTask({
+			await saveTask({
 				id: taskId,
 				user_id: prevTask.user_id,
 				task_name: prevTask.task_name,

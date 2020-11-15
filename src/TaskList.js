@@ -84,7 +84,7 @@ export default function TaskList(){
 
 
 		for(const[index, value] of filteredTasks.entries()){
-			console.log(subtaskToTaskMap.get(value.id));
+			const formattedDate = value.deadline.toString().split('T')[0];
 			setUserTasks((userTasks) => [
 				...userTasks,
 				((showCategory === value.category_id) && <TaskItem
@@ -93,7 +93,7 @@ export default function TaskList(){
 					name={value.task_name}
 					maxProgress={value.total}
 					progress={value.progress}
-					dueDate={value.deadline}
+					dueDate={formattedDate}
 					subtasks={subtaskToTaskMap.get(value.id)}
 				></TaskItem>),
       		]);
