@@ -7,7 +7,6 @@ import { fetchUsers, saveAchievement, saveUser } from './api';
 
 
 export default function Home(){
-	console.log("env key: " + process.env.REACT_APP_GOOGLE_SIGNIN_CLIENT_ID)
 
 	const {
 		isLoggedIn,
