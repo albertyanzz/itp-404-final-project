@@ -163,12 +163,8 @@ export default function AddTask(){
 	}
 
 	function addSubtask(){
-		console.log(subtask.length);
-		if(true){
-			// setSubtaskError("Each subtask cannot exceed 40 characters");
-			// setSubtaskIsValid(false);
-		}
-		else {
+
+		const doThis = subtask.length > 40 ? setSubtaskError("Each subtask cannot exceed 40 characters") : () => {
 			const task = {
 				name: subtask,
 				id: newSubtasks.length,
@@ -176,6 +172,19 @@ export default function AddTask(){
 			setNewSubtasks(newSubtasks.concat([task]));
 			setSubtask("");
 		}
+
+		// if(true){
+		// 	// setSubtaskError("Each subtask cannot exceed 40 characters");
+		// 	// setSubtaskIsValid(false);
+		// }
+		// else {
+		// 	const task = {
+		// 		name: subtask,
+		// 		id: newSubtasks.length,
+		// 	}
+		// 	setNewSubtasks(newSubtasks.concat([task]));
+		// 	setSubtask("");
+		// }
 	}
 
 	function removeSubtask(event){
