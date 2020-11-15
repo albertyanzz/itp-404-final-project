@@ -28,9 +28,14 @@ body {
   margin-bottom: 100px;
 }
 
-.errorMsg {
-  margin-top: 10px;
+.nameErrorMsg {
+  margin-left: 10%;
 }
+
+.subtaskErrorMsg {
+  margin-left: 14%;
+}
+
 
 .topTitle {
   font-family: Verdana, Geneva, sans-serif;

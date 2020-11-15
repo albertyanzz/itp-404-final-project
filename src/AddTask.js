@@ -214,7 +214,7 @@ export default function AddTask(){
 					<div className="form-group col-md-6">
 						<label htmlFor="name">Name</label>
 						{!nameIsValid && 
-							<span className="alert-danger errorMsg">
+							<span className="alert-danger nameErrorMsg">
 								{nameError}
 							</span>
 						}
@@ -257,11 +257,6 @@ export default function AddTask(){
 							value={subtask}
 							onChange={handleSubtaskChange}
 						/>
-						{!subtaskIsValid && 
-							<div className="alert alert-danger errorMsg">
-								{subtaskError}
-							</div>
-						}
 					</div>
 					<div className="form-group col-sm-1">
 						<button className="btn btn-primary" onClick={addSubtask} disabled={subtask === ""}>Add</button>
@@ -287,7 +282,11 @@ export default function AddTask(){
 						<button className="btn btn-primary" onClick={removeSubtask}>Remove</button>
 					</div>
 				</div>
-
+				{!subtaskIsValid && 
+							<span className="alert-danger subtaskErrorMsg">
+								{subtaskError}
+							</span>
+						}
 				<div className="row justify-content-center align-items-end">
 					<div className="form-group col-sm-3">
 						<label htmlFor="deadline">Deadline</label>
