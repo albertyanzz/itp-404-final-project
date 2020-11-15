@@ -62,7 +62,7 @@ function App() {
 			return achievement.user_id === userId;
 		})
 
-		saveAchievement({
+		await saveAchievement({
 			id: userAchievement.id,
 			user_id: userId,
 			tasks_completed: (userAchievement.tasks_completed+1),
@@ -72,9 +72,20 @@ function App() {
 			setAchievements(data);
 		})
 
-		const prevTask = await fetchTask(taskId);
+		updateTaskProgress(taskId);
+  }
 
-		if(prevTask.progress+1 === prevTask.total){
+  async function updateTaskProgress(taskId){
+    const prevTask = await fetchTask(taskId);
+
+    // extra failproof
+    const subTasks = await fetchSubtasks();
+
+    const filteredSubtasks = subTasks.filter((subtask) => {
+      return subtask.task_id = taskId;
+    })
+
+		if(filteredSubtasks.length === 0){
       destroyTask(taskId);
       createSuccessNotification("You finished a task!", "Let's gooo!");
 			setTasks(tasks.filter((task) => {
@@ -87,7 +98,7 @@ function App() {
 				user_id: prevTask.user_id,
 				task_name: prevTask.task_name,
 				deadline: prevTask.deadline,
-				progress: (prevTask.progress + 1),
+				progress: (prevTask.total - filteredSubtasks.length),
 				total: prevTask.total,
 				category_id: prevTask.category_id,
 			})
@@ -129,6 +140,7 @@ function App() {
         setAchievements,
         deleteSubtask,
         createSuccessNotification,
+        updateTaskProgress,
       }}
     >
       <Router>

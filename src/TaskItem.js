@@ -9,7 +9,7 @@ import { fetchSubtasks } from './api';
 
 
 export default function TaskItem({name, maxProgress, progress, dueDate, subtasks, id}){
-	const { deleteSubtask } = useContext(DataStoreContext);
+	const { deleteSubtask, updateTaskProgress } = useContext(DataStoreContext);
 	const [showSubTask, setShowSubTask] = useState(false);
 	const [taskSubtasks, setTaskSubtasks] = useState([]);
 	const [progressBar, setProgressBar] = useState([]);
@@ -28,8 +28,10 @@ export default function TaskItem({name, maxProgress, progress, dueDate, subtasks
 			if(thisSubtasks){
 				setCurrProgress(maxProgress - thisSubtasks.length)
 			}
-		})
-	}, [id, maxProgress])
+		});
+
+		updateTaskProgress(id);
+	}, [id, maxProgress, updateTaskProgress])
 
 	useEffect(() => {
 		setTaskSubtasks([]);
