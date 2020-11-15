@@ -9,6 +9,9 @@ import CalendarExport from "./CalendarExport";
 import PageNotFound from "./PageNotFound";
 import PopUpMenu from "./PopUpMenu";
 import { DataStoreContext } from "./contexts";
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import { store } from 'react-notifications-component';
 import {
   fetchTasks,
   fetchCategories,
@@ -32,8 +35,24 @@ function App() {
   const [achievements, setAchievements] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  function createSuccessNotification(title, message){
+    store.addNotification({
+      title: title,
+      message: message,
+      type: "success",
+      insert: "top",
+      container: "top-right",
+      animationIn: ["animate__animated", "animate__fadeIn"],
+      animationOut: ["animate__animated", "animate__fadeOut"],
+      dismiss: {
+      duration: 1000,
+      }
+    });
+  }
+
   async function deleteSubtask(id, taskId){
     await destroySubtask(id);
+    createSuccessNotification("Subtask completed!", "Woohoo!");
 
     const newSubtasks = await fetchSubtasks();
     setSubtasks(newSubtasks);
@@ -56,7 +75,8 @@ function App() {
 		const prevTask = await fetchTask(taskId);
 
 		if(prevTask.progress+1 === prevTask.total){
-			destroyTask(taskId);
+      destroyTask(taskId);
+      createSuccessNotification("You finished a task!", "Let's gooo!");
 			setTasks(tasks.filter((task) => {
 				return task.id !== taskId;
 			}))
@@ -108,9 +128,11 @@ function App() {
         achievements,
         setAchievements,
         deleteSubtask,
+        createSuccessNotification,
       }}
     >
       <Router>
+        <ReactNotification />
         <PopUpMenu></PopUpMenu>
         <div className="container mt-5">
           <Switch>

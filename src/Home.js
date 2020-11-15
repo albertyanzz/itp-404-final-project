@@ -5,9 +5,16 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { DataStoreContext } from "./contexts";
 import { fetchUsers, saveAchievement, saveUser } from './api';
 
-
 export default function Home(){
-	const { isLoggedIn, setIsLoggedIn, setCurrUser, userName, setUserName, setUserId } = useContext(DataStoreContext);
+	const {
+		isLoggedIn,
+		setIsLoggedIn,
+		setCurrUser,
+		userName,
+		setUserName,
+		setUserId,
+		createSuccessNotification,
+  	} = useContext(DataStoreContext);
 
 	const responseGoogle = (response) => {
 		console.log(response);
@@ -20,6 +27,8 @@ export default function Home(){
 		function handleLogout() {
 			setIsLoggedIn(false);
 			setCurrUser(null);
+
+			createSuccessNotification("Log out success!", "See you soon!")			
 		}
 
 		async function onSignIn(googleUser) {
@@ -64,7 +73,12 @@ export default function Home(){
 						})
 					});
 				}
+
+				createSuccessNotification("Sign in success!", "Welcome back!");
+				
 			})
+
+			
 		}
 
 
@@ -88,7 +102,7 @@ export default function Home(){
 			),
 			document.getElementById('googleButton')
 		  );
-	}, [setIsLoggedIn, isLoggedIn, setCurrUser, setUserName, setUserId]);
+	}, [setIsLoggedIn, isLoggedIn, setCurrUser, setUserName, setUserId, createSuccessNotification]);
 
 	return(
 		<div className="homeContainer">

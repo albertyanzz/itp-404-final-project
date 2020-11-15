@@ -20,7 +20,15 @@ export default function AddTask(){
 	const [subtaskError, setSubtaskError] = useState("");
 	const [nameIsValid, setNameIsValid] = useState(true);
 	const [subtaskIsValid, setSubtaskIsValid] = useState(true);
-	const { isLoggedIn, categories, setCategories, userId, setSubtasks, setTasks } = useContext(DataStoreContext);
+	const {
+		isLoggedIn,
+		categories,
+		setCategories,
+		userId,
+		setSubtasks,
+		setTasks,
+		createSuccessNotification,
+	} = useContext(DataStoreContext);
 
 	function hideCategoryModal(){
 		setCategoryModalOpen(false);
@@ -92,6 +100,9 @@ export default function AddTask(){
 		setDeadline("");
 		setSubtask("");
 		setNewSubtasks([]);
+
+		createSuccessNotification("Task added!","Happy tasking!")
+		
 		history.push("/tasks");
 	}
 
