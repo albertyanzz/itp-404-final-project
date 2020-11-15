@@ -15,14 +15,46 @@ export default function AddTask(){
 	const [subtask, setSubtask] = useState("");
 	const [newSubtasks, setNewSubtasks] = useState([]);
 	const [selectedSubtask, setSelectedSubtask] = useState("");
+	const [userCategories, setUserCategories] = useState([]);
+	const [nameError, setNameError] = useState("");
+	const [subtaskError, setSubtaskError] = useState("");
+	const [nameIsValid, setNameIsValid] = useState(true);
+	const [subtaskIsValid, setSubtaskIsValid] = useState(true);
 	const { isLoggedIn, categories, setCategories, userId, setSubtasks, setTasks } = useContext(DataStoreContext);
 
 	function hideCategoryModal(){
 		setCategoryModalOpen(false);
 	}
 
+	function validForm(){
+		setNameIsValid(true);
+		setSubtaskIsValid(true);
+		var valid = true;
+		if(name.length > 20){
+			setNameError("Name cannot exceed 20 characters");
+			setNameIsValid(false);
+			valid = false;
+		}
+		var value;
+		for(value of newSubtasks){
+			if(value.name.length > 40){
+				setSubtaskError("Each subtask must be under 40 characters");
+				setSubtaskIsValid(false);
+				valid = false;
+				break;
+			}
+		}
+
+		return valid;
+	}
+
+
 	async function handleSubmit(event) {
 		event.preventDefault();
+
+		if(!validForm()){
+			return;
+		}
 
 		const newTask = {
 			user_id: userId,
@@ -96,7 +128,7 @@ export default function AddTask(){
 			user_id: userId,
 		}
 
-		const searchCategory = categories.find((category) => {
+		const searchCategory = userCategories.find((category) => {
 			return category.category_name === newCategory;
 		})
 		if(searchCategory){
@@ -145,7 +177,13 @@ export default function AddTask(){
 
 	useEffect(() => {
 		document.title = "Add Tasks | Microplanner"
-	}, []);
+
+		const filteredCategories = categories.filter((category) => {
+			return category.user_id === userId;
+		})
+
+		setUserCategories(filteredCategories);
+	}, [categories, userId]);
 
 	if(!isLoggedIn){
 		return (
@@ -171,6 +209,11 @@ export default function AddTask(){
 							className="form-control"
 							id="name"
 						/>
+						{!nameIsValid && 
+							<div className="alert alert-danger errorMsg">
+								{nameError}
+							</div>
+						}
 					</div>
 					<div className="form-group col-sm-3">
 						<label htmlFor="category">Category</label>
@@ -181,7 +224,7 @@ export default function AddTask(){
 							onChange={handleCategoryChange}
 						>
 							<option value="DEFAULT" disabled>Choose a category</option>
-							{categories.map((category) => {
+							{userCategories.map((category) => {
 								return (
 									<option key={category.id} value={category.id}>
 										{category.category_name}
@@ -222,6 +265,11 @@ export default function AddTask(){
 								)
 							})}
 						</select>
+						{!subtaskIsValid && 
+							<div className="alert alert-danger errorMsg">
+								{subtaskError}
+							</div>
+						}
 					</div>
 					<div className="form-group col-sm-1">
 						<button className="btn btn-primary" onClick={removeSubtask}>Remove</button>
@@ -240,7 +288,7 @@ export default function AddTask(){
 					</div>
 				</div>
 				<div className="row justify-content-center">
-					<div className="form-group col-sm-2" style={{marginTop: "100px"}}>
+					<div className="form-group col-sm-2" style={{marginTop: "50px"}}>
 						<button type="submit" className="btn btn-primary" disabled={!fieldsFilled()}>
         					Save
      	 				</button>

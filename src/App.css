@@ -27,6 +27,9 @@ body {
   margin: 10px;
 }
 
+.errorMsg {
+  margin-top: 10px;
+}
 
 .topTitle {
   font-family: Verdana, Geneva, sans-serif;
@@ -82,15 +85,23 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-left: 50px;
+  margin-left: 10px;
 }
 
 .taskName {
   font-family: Verdana, Geneva, sans-serif;
-  justify-content: center;
   font-weight: 100;
   font-size: medium;
   color: Black;
+  width: 30%;
+}
+
+.subTaskName {
+  width: 50%;
+}
+
+.taskBox {
+  justify-content: center;
   display: flex;
   flex-direction: row;
   align-items: center;

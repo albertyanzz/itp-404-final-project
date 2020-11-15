@@ -66,8 +66,8 @@ export default function TaskItem({name, maxProgress, progress, dueDate, subtasks
 
 	return (
 		<div className="taskBackdrop">
-			<div className="taskName">
-				<div>
+			<div className="taskBox">
+				<div className="taskName">
 					{name}
 					<br></br>
 					{`Due: ${dueDate}`}
