@@ -4,11 +4,10 @@ import ReactDOM from 'react-dom';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { DataStoreContext } from "./contexts";
 import { fetchUsers, saveAchievement, saveUser } from './api';
-import dotenv from 'dotenv';
 
 
 export default function Home(){
-	dotenv.config();
+	console.log("env key: " + process.env.REACT_APP_GOOGLE_SIGNIN_CLIENT_ID)
 
 	const {
 		isLoggedIn,
@@ -89,7 +88,7 @@ export default function Home(){
 		ReactDOM.render(
 			(isLoggedIn ? 
 				<GoogleLogout
-					clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+					clientId={process.env.REACT_APP_GOOGLE_SIGNIN_CLIENT_ID}
 					buttonText="Logout"
 					onLogoutSuccess={handleLogout}
 			  	>
