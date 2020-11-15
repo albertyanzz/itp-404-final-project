@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SubTasks from './SubTasks';
 import ProgressBar from './ProgressBar';
 import { DataStoreContext } from "./contexts";
+import { fetchSubtasks } from './api';
 
 
 
@@ -18,11 +19,26 @@ export default function TaskItem({name, maxProgress, progress, dueDate, subtasks
 		setShowSubTask(!showSubTask);
 	}
 
+	function updateProgress(){
+		const taskSubtasks = fetchSubtasks().then((data) => {
+			const filteredSubtasks = data.filter((subtask) => {
+				return subtask.task_id === id;
+			})
+
+			return filteredSubtasks;
+		}).then((filteredSubtasks) => {
+			if(filteredSubtasks){
+				setCurrProgress(maxProgress - filteredSubtasks.length);
+			}
+		})
+	}
+
 	useEffect(() => {
+		updateProgress();
 		setTaskSubtasks([]);
 
 		function removeSubtask(id, taskId){
-			setCurrProgress(currProgress+1);
+			updateProgress();
 			deleteSubtask(id, taskId);
 		}
 		
