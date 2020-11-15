@@ -2,6 +2,7 @@
   "name": "itp-404-final-project",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3333",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
@@ -11,6 +12,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "4.5.3",
+    "dotenv": "^8.2.0",
     "framer-motion": "^2.9.4",
     "json-server": "^0.16.2",
     "react": "^17.0.1",
