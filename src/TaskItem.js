@@ -20,20 +20,6 @@ export default function TaskItem({name, maxProgress, progress, dueDate, subtasks
 	}
 
 	useEffect(() => {
-		fetchSubtasks().then((data) => {
-			const thisSubtasks = data.filter((data) => {
-				return data.task_id === id;
-			})
-
-			if(thisSubtasks){
-				setCurrProgress(maxProgress - thisSubtasks.length)
-			}
-		});
-
-		updateTaskProgress(id);
-	}, [id, maxProgress, updateTaskProgress])
-
-	useEffect(() => {
 		setTaskSubtasks([]);
 
 		function removeSubtask(id, taskId){
