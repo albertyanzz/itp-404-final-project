@@ -32,7 +32,7 @@ export function fetchTask(id) {
   return fetch(`/api/tasks/${id}`).then((response) => {
     if (response.status >= 400) {
       return Promise.reject(
-        `There was an error requesting the task with and id of ${id}`
+        `There was an error requesting the task with an id of ${id}`
       );
     }
 
@@ -44,7 +44,7 @@ export function fetchSubtask(id) {
   return fetch(`/api/subtasks/${id}`).then((response) => {
     if (response.status >= 400) {
       return Promise.reject(
-        `There was an error requesting the subtask with and id of ${id}`
+        `There was an error requesting the subtask with an id of ${id}`
       );
     }
 
@@ -56,7 +56,7 @@ export function fetchCategory(id) {
   return fetch(`/api/categories/${id}`).then((response) => {
     if (response.status >= 400) {
       return Promise.reject(
-        `There was an error requesting the category with and id of ${id}`
+        `There was an error requesting the category with an id of ${id}`
       );
     }
 
@@ -68,7 +68,7 @@ export function fetchAchievement(id) {
   return fetch(`/api/achievements/${id}`).then((response) => {
     if (response.status >= 400) {
       return Promise.reject(
-        `There was an error requesting the achievement with and id of ${id}`
+        `There was an error requesting the achievement with an id of ${id}`
       );
     }
 
