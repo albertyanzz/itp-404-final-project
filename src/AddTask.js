@@ -115,7 +115,6 @@ export default function AddTask(){
 	}
 
 	function handleSubtaskChange(event) {
-		console.log(event);
 		setSubtask(event.target.value);
 	}
 
