@@ -4,12 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SubTasks from './SubTasks';
 import ProgressBar from './ProgressBar';
 import { DataStoreContext } from "./contexts";
-import { fetchSubtasks } from './api';
 
 
 
 export default function TaskItem({name, maxProgress, progress, dueDate, subtasks, id}){
-	const { deleteSubtask, updateTaskProgress } = useContext(DataStoreContext);
+	const { deleteSubtask } = useContext(DataStoreContext);
 	const [showSubTask, setShowSubTask] = useState(false);
 	const [taskSubtasks, setTaskSubtasks] = useState([]);
 	const [progressBar, setProgressBar] = useState([]);

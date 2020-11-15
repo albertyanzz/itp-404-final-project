@@ -43,15 +43,15 @@ export default function AddTask(){
 			setNameIsValid(false);
 			valid = false;
 		}
-		var value;
-		for(value of newSubtasks){
-			if(value.name.length > 40){
-				setSubtaskError("Each subtask must be under 40 characters");
-				setSubtaskIsValid(false);
-				valid = false;
-				break;
-			}
-		}
+		// var value;
+		// for(value of newSubtasks){
+		// 	if(value.name.length > 40){
+		// 		setSubtaskError("Each subtask must be under 40 characters");
+		// 		setSubtaskIsValid(false);
+		// 		valid = false;
+		// 		break;
+		// 	}
+		// }
 
 		return valid;
 	}
@@ -163,12 +163,19 @@ export default function AddTask(){
 	}
 
 	function addSubtask(){
-		const task = {
-			name: subtask,
-			id: newSubtasks.length,
+		console.log(subtask.length);
+		if(true){
+			// setSubtaskError("Each subtask cannot exceed 40 characters");
+			// setSubtaskIsValid(false);
 		}
-		setNewSubtasks(newSubtasks.concat([task]));
-		setSubtask("");
+		else {
+			const task = {
+				name: subtask,
+				id: newSubtasks.length,
+			}
+			setNewSubtasks(newSubtasks.concat([task]));
+			setSubtask("");
+		}
 	}
 
 	function removeSubtask(event){
@@ -257,6 +264,11 @@ export default function AddTask(){
 							value={subtask}
 							onChange={handleSubtaskChange}
 						/>
+						{!subtaskIsValid && 
+							<div className="alert alert-danger errorMsg">
+								{subtaskError}
+							</div>
+						}
 					</div>
 					<div className="form-group col-sm-1">
 						<button className="btn btn-primary" onClick={addSubtask} disabled={subtask === ""}>Add</button>
@@ -276,11 +288,7 @@ export default function AddTask(){
 								)
 							})}
 						</select>
-						{!subtaskIsValid && 
-							<div className="alert alert-danger errorMsg">
-								{subtaskError}
-							</div>
-						}
+
 					</div>
 					<div className="form-group col-sm-1">
 						<button className="btn btn-primary" onClick={removeSubtask}>Remove</button>
