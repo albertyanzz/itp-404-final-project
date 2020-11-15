@@ -40,6 +40,9 @@ export default function TaskList(){
 			setTasksAvailable(false);
 			return;
 		}
+		else {
+			setTasksAvailable(true)
+		}
 
 		const taskToCategoryMap = new Map();
 		var taskValue;
@@ -65,24 +68,28 @@ export default function TaskList(){
 		}
 
 		for(const[index, value] of filteredCategories.entries()){
-			setUserCategories((userCategories) => [
-				...userCategories,
-				<TaskCategory
-					key={index}
-					name={value.category_name}
-					count={taskToCategoryMap.get(value.id) ? taskToCategoryMap.get(value.id).length : 0}
-					id={value.id}
-					toggleCategory={toggleCategory}
-				></TaskCategory>,
-      		]);
+			if(taskToCategoryMap.get(value.id)){
+				setUserCategories((userCategories) => [
+					...userCategories,
+					<TaskCategory
+						key={index}
+						name={value.category_name}
+						count={taskToCategoryMap.get(value.id).length}
+						id={value.id}
+						toggleCategory={toggleCategory}
+					></TaskCategory>,
+				  ]);
+			}
 		}
 
 
 		for(const[index, value] of filteredTasks.entries()){
+			console.log(subtaskToTaskMap.get(value.id));
 			setUserTasks((userTasks) => [
 				...userTasks,
 				((showCategory === value.category_id) && <TaskItem
 					key={index}
+					id={value.id}
 					name={value.task_name}
 					maxProgress={value.total}
 					progress={value.progress}
@@ -102,29 +109,30 @@ export default function TaskList(){
 			</div>
 		)
 	}
-	else if(!tasksAvailable){
-		return (
-			<div className="justify-content-center">
-			  <div className="row centerTitle" id="achievementTitle">
-				Add some tasks!
-			  </div>
-			</div>
-		)
-	}
-
 	return(
-		<div>
-			<div className="row topTitle" id="taskTitle">
-				Tasks
-			</div>
-			<div className="row">
-				<div className="col col-md-4 taskContainer">
-					{userCategories}
+		(!tasksAvailable ?
+			<div className="justify-content-center">
+				<div className="row centerTitle" id="achievementTitle">
+				Add some tasks!
 				</div>
-				<div className="col col-md-6 taskItem">
-					{userTasks}
-          		</div>
+		  	</div>
+		
+			:
+
+			<div>
+				<div className="row topTitle" id="taskTitle">
+					Tasks
+				</div>
+				<div className="row">
+					<div className="col col-md-4 taskContainer">
+						{userCategories}
+					</div>
+					<div className="col col-md-6 taskItem">
+						{userTasks}
+					</div>
+				</div>
 			</div>
-		</div>
+			
+		)
 	)
 }

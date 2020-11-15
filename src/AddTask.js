@@ -109,8 +109,13 @@ export default function AddTask(){
 			return fetchCategories();
 		}).then((data) => {
 			setCategories(data);
+			const select = data.find((data) => {
+				return (data.user_id === cat.user_id && data.category_name === cat.category_name)
+			})
+			setSelectedCategory(select.id);
+
 		});
-		setSelectedCategory(categories.length+1);
+
 		setCategoryModalOpen(false);
 	}
 

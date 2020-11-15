@@ -9,7 +9,17 @@ import CalendarExport from "./CalendarExport";
 import PageNotFound from "./PageNotFound";
 import PopUpMenu from "./PopUpMenu";
 import { DataStoreContext } from "./contexts";
-import { fetchTasks, fetchCategories, fetchAchievements, fetchSubtasks } from './api';
+import {
+  fetchTasks,
+  fetchCategories,
+  fetchAchievements,
+  fetchSubtasks,
+  destroySubtask,
+  saveAchievement,
+  fetchTask,
+  destroyTask,
+  saveTask,
+} from "./api";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,6 +31,48 @@ function App() {
   const [subtasks, setSubtasks] = useState([]);
   const [achievements, setAchievements] = useState([]);
   const [categories, setCategories] = useState([]);
+
+  async function deleteSubtask(id, taskId){
+    await destroySubtask(id);
+
+    const newSubtasks = await fetchSubtasks();
+    setSubtasks(newSubtasks);
+
+
+		const userAchievement = achievements.find((achievement) => {
+			return achievement.user_id === userId;
+		})
+
+		saveAchievement({
+			id: userAchievement.id,
+			user_id: userId,
+			tasks_completed: (userAchievement.tasks_completed+1),
+		});
+
+		fetchAchievements().then((data) => {
+			setAchievements(data);
+		})
+
+		const prevTask = await fetchTask(taskId);
+
+		if(prevTask.progress+1 === prevTask.total){
+			destroyTask(taskId);
+			setTasks(tasks.filter((task) => {
+				return task.id !== taskId;
+			}))
+		}
+		else {
+			saveTask({
+				id: taskId,
+				user_id: prevTask.user_id,
+				task_name: prevTask.task_name,
+				deadline: prevTask.deadline,
+				progress: (prevTask.progress + 1),
+				total: prevTask.total,
+				category_id: prevTask.category_id,
+			})
+		}
+  }
 
   useEffect(() => {
     Promise.all([
@@ -53,7 +105,9 @@ function App() {
         setSubtasks,
         categories,
         setCategories,
-        achievements
+        achievements,
+        setAchievements,
+        deleteSubtask,
       }}
     >
       <Router>

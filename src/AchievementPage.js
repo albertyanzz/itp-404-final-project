@@ -10,11 +10,11 @@ export default function AchievementPage(){
 
     useEffect(() => {
       document.title = "Achievements | Microplanner";
-      const userAchievements = achievements.find((achievement) => {
+      const currentAchievements = achievements.find((achievement) => {
         return achievement.user_id === userId;
       });
 
-      setUserAchievements(userAchievements);
+      setUserAchievements(currentAchievements);
 	  }, [achievements, userId])
 
     if(isLoggedIn) {
@@ -30,7 +30,7 @@ export default function AchievementPage(){
                     backgroundColor="red"
                     name="Task streak"
                     maxProgress="10"
-                    progress={userAchievements.tasks_completed}
+                    progress={userAchievements.tasks_completed > 10 ? 10 : userAchievements.tasks_completed}
                 >
                     {"Complete 10 tasks"}
                 </AchievementItem>
