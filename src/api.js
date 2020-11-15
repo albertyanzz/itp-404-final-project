@@ -4,6 +4,12 @@ export function fetchTasks() {
   });
 }
 
+export function fetchUsers() {
+  return fetch("/api/users").then((response) => {
+    return response.json();
+  });
+}
+
 export function fetchSubtasks() {
   return fetch("/api/subtasks").then((response) => {
     return response.json();

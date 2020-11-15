@@ -19,10 +19,13 @@ export default function AchievementPage(){
 
     if(isLoggedIn) {
         return (
+
           <div>
             <div className="row topTitle" id="achievementTitle">
               Achievements
             </div>
+
+            {userAchievements &&
             <div className="achievementsList">
                 <AchievementItem
                     icon={faTrophy}
@@ -35,6 +38,7 @@ export default function AchievementPage(){
                     {"Complete 10 tasks"}
                 </AchievementItem>
             </div>
+            }
           </div>
         );
     }

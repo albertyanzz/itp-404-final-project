@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import ReactDOM from 'react-dom';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { DataStoreContext } from "./contexts";
+import { fetchUsers, saveAchievement, saveUser } from './api';
 
 
 export default function Home(){
-	const { isLoggedIn, setIsLoggedIn, setCurrUser, userName, setUserName } = useContext(DataStoreContext);
+	const { isLoggedIn, setIsLoggedIn, setCurrUser, userName, setUserName, setUserId } = useContext(DataStoreContext);
 
 	const responseGoogle = (response) => {
 		console.log(response);
@@ -35,6 +36,36 @@ export default function Home(){
 			setUserName(profile.getGivenName());
 
 			//find user id here
+
+			fetchUsers().then((data) => {
+				const user = data.find((data) => {
+					return data.email === profile.getEmail();
+				})
+
+				if(user){
+					//exists
+					setUserId(user.id);
+				}
+				else{
+					const newUser = {
+						username: profile.getEmail(),
+						email: profile.getEmail(),
+					}
+
+					saveUser(newUser).then(() => {
+						fetchUsers().then((data) => {
+							const addedUser = data.find((data) => {
+								return data.email === profile.getEmail();
+							})
+							saveAchievement({
+								user_id: addedUser.id,
+								tasks_completed: 0,
+							})
+							setUserId(addedUser.id);
+						})
+					});
+				}
+			})
 		}
 
 
@@ -58,7 +89,7 @@ export default function Home(){
 			),
 			document.getElementById('googleButton')
 		  );
-	}, [setIsLoggedIn, isLoggedIn, setCurrUser, setUserName]);
+	}, [setIsLoggedIn, isLoggedIn, setCurrUser, setUserName, setUserId]);
 
 	return(
 		<div className="homeContainer">

@@ -25,7 +25,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currUser, setCurrUser] = useState(null);
   const [userName, setUserName] = useState("");
-  const [userId, setUserId] = useState(1);
+  const [userId, setUserId] = useState(null);
 
   const [tasks, setTasks] = useState([]);
   const [subtasks, setSubtasks] = useState([]);
@@ -86,7 +86,7 @@ function App() {
       setSubtasks(subtasks);
       setCategories(categories);
     });
-  }, []);
+  }, [userId]);
 
   return (
     <DataStoreContext.Provider
