@@ -20,6 +20,7 @@ export default function AddTask(){
 	const [subtaskError, setSubtaskError] = useState("");
 	const [nameIsValid, setNameIsValid] = useState(true);
 	const [subtaskIsValid, setSubtaskIsValid] = useState(true);
+	const [submit, setSubmit] = useState(false);
 	const {
 		isLoggedIn,
 		categories,
@@ -49,6 +50,7 @@ export default function AddTask(){
 
 	async function handleSubmit(event) {
 		event.preventDefault();
+		setSubmit(true);
 
 		if(!validForm()){
 			return;
@@ -300,8 +302,8 @@ export default function AddTask(){
 				</div>
 				<div className="row justify-content-center">
 					<div className="form-group col-sm-2" style={{marginTop: "50px"}}>
-						<button type="submit" className="btn btn-primary" disabled={!fieldsFilled()}>
-        					Save
+						<button type="submit" className="btn btn-primary" disabled={!fieldsFilled() && !submit}>
+        					{submit ? "Loading..." : "Save"}
      	 				</button>
 					</div>
 				</div>
