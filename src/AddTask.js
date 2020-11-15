@@ -74,7 +74,7 @@ export default function AddTask(){
 				subtask_name: a_subtask.name,
 			};
 
-			saveSubtask(newSubtask);
+			await saveSubtask(newSubtask);
 		}
 
 		fetchTasks().then((data) => {

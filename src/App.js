@@ -52,15 +52,21 @@ function App() {
 
   async function deleteSubtask(id, taskId){
     await destroySubtask(id);
+    updateTaskProgress(taskId);
     createSuccessNotification("Subtask completed!", "Woohoo!");
 
     const newSubtasks = await fetchSubtasks();
     setSubtasks(newSubtasks);
 
+    const userAchievement = fetchAchievements().then((data) => {
+      return data.find((achievement) => {
+        return achievement.user_id === userId;
+      })
+    })
 
-		const userAchievement = achievements.find((achievement) => {
-			return achievement.user_id === userId;
-		})
+		// const userAchievement = achievements.find((achievement) => {
+		// 	return achievement.user_id === userId;
+		// })
 
 		await saveAchievement({
 			id: userAchievement.id,
@@ -71,8 +77,6 @@ function App() {
 		fetchAchievements().then((data) => {
 			setAchievements(data);
 		})
-
-		updateTaskProgress(taskId);
   }
 
   async function updateTaskProgress(taskId){
