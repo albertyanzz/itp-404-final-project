@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import AchievementItem from './AchievementItem';
 import { DataStoreContext } from "./contexts";
-import { faTrophy } from "@fortawesome/free-solid-svg-icons";
+import { faTrophy, faFire, faStar } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function AchievementPage(){
@@ -27,16 +27,42 @@ export default function AchievementPage(){
 
             {userAchievements &&
             <div className="achievementsList">
-                <AchievementItem
-                    icon={faTrophy}
-                    iconColor="yellow"
-                    backgroundColor="red"
-                    name="Task streak"
-                    maxProgress="10"
-                    progress={userAchievements.tasks_completed > 10 ? 10 : userAchievements.tasks_completed}
-                >
-                    {"Complete 10 tasks"}
-                </AchievementItem>
+                <div className="achievementRow">
+                  <AchievementItem
+                      icon={faTrophy}
+                      iconColor="yellow"
+                      backgroundColor="red"
+                      name="Task streak"
+                      maxProgress="10"
+                      progress={userAchievements.tasks_completed > 10 ? 10 : userAchievements.tasks_completed}
+                  >
+                      {"Complete 10 tasks"}
+                  </AchievementItem>
+                </div>
+                <div className="achievementRow">
+                  <AchievementItem
+                      icon={faStar}
+                      iconColor="yellow"
+                      backgroundColor="green"
+                      name="Getting hot"
+                      maxProgress="50"
+                      progress={userAchievements.tasks_completed > 10 ? 10 : userAchievements.tasks_completed}
+                  >
+                      {"Complete 50 tasks"}
+                  </AchievementItem>
+                </div>
+                <div className="achievementRow">
+                  <AchievementItem
+                      icon={faFire}
+                      iconColor="red"
+                      backgroundColor="purple"
+                      name="On fire!"
+                      maxProgress="100"
+                      progress={userAchievements.tasks_completed > 10 ? 10 : userAchievements.tasks_completed}
+                  >
+                      {"Complete 100 tasks"}
+                  </AchievementItem>
+                </div>
             </div>
             }
           </div>
