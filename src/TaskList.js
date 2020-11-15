@@ -72,7 +72,8 @@ export default function TaskList(){
 				setUserCategories((userCategories) => [
 					...userCategories,
 					<TaskCategory
-						key={index}
+						key={value.id}
+						index={index}
 						name={value.category_name}
 						count={taskToCategoryMap.get(value.id).length}
 						id={value.id}
@@ -88,8 +89,9 @@ export default function TaskList(){
 			setUserTasks((userTasks) => [
 				...userTasks,
 				((showCategory === value.category_id) && <TaskItem
-					key={index}
+					key={value.id}
 					id={value.id}
+					index={index}
 					name={value.task_name}
 					maxProgress={value.total}
 					progress={value.progress}
