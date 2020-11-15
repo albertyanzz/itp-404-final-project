@@ -36,7 +36,6 @@ export default function AddTask(){
 
 	function validForm(){
 		setNameIsValid(true);
-		setSubtaskIsValid(true);
 		var valid = true;
 		if(name.length > 20){
 			setNameError("Name cannot exceed 20 characters");
@@ -155,13 +154,12 @@ export default function AddTask(){
 	}
 
 	function addSubtask(){
+		setSubtaskIsValid(true);
 
 		if(subtask.length > 40){
 			setSubtaskError("Each subtask cannot exceed 40 characters");
 			setSubtaskIsValid(false);
-			const temp = subtask;
-			setSubtask("");
-			setSubtask(temp);
+			setSubtask(""); //it breaks without this line I don't know
 		}
 		else {
 			const task = {
@@ -215,6 +213,11 @@ export default function AddTask(){
 				<div className="row justify-content-around">
 					<div className="form-group col-md-6">
 						<label htmlFor="name">Name</label>
+						{!nameIsValid && 
+							<span className="alert-danger errorMsg">
+								{nameError}
+							</span>
+						}
 						<input
 							type="text"
 							value={name}
@@ -222,11 +225,6 @@ export default function AddTask(){
 							className="form-control"
 							id="name"
 						/>
-						{!nameIsValid && 
-							<div className="alert alert-danger errorMsg">
-								{nameError}
-							</div>
-						}
 					</div>
 					<div className="form-group col-sm-3">
 						<label htmlFor="category">Category</label>
@@ -289,6 +287,7 @@ export default function AddTask(){
 						<button className="btn btn-primary" onClick={removeSubtask}>Remove</button>
 					</div>
 				</div>
+
 				<div className="row justify-content-center align-items-end">
 					<div className="form-group col-sm-3">
 						<label htmlFor="deadline">Deadline</label>
