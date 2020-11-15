@@ -43,15 +43,6 @@ export default function AddTask(){
 			setNameIsValid(false);
 			valid = false;
 		}
-		// var value;
-		// for(value of newSubtasks){
-		// 	if(value.name.length > 40){
-		// 		setSubtaskError("Each subtask must be under 40 characters");
-		// 		setSubtaskIsValid(false);
-		// 		valid = false;
-		// 		break;
-		// 	}
-		// }
 
 		return valid;
 	}
@@ -125,6 +116,7 @@ export default function AddTask(){
 	}
 
 	function handleSubtaskChange(event) {
+		console.log(event);
 		setSubtask(event.target.value);
 	}
 
@@ -164,7 +156,14 @@ export default function AddTask(){
 
 	function addSubtask(){
 
-		const doThis = subtask.length > 40 ? setSubtaskError("Each subtask cannot exceed 40 characters") : () => {
+		if(subtask.length > 40){
+			setSubtaskError("Each subtask cannot exceed 40 characters");
+			setSubtaskIsValid(false);
+			const temp = subtask;
+			setSubtask("");
+			setSubtask(temp);
+		}
+		else {
 			const task = {
 				name: subtask,
 				id: newSubtasks.length,
@@ -172,19 +171,6 @@ export default function AddTask(){
 			setNewSubtasks(newSubtasks.concat([task]));
 			setSubtask("");
 		}
-
-		// if(true){
-		// 	// setSubtaskError("Each subtask cannot exceed 40 characters");
-		// 	// setSubtaskIsValid(false);
-		// }
-		// else {
-		// 	const task = {
-		// 		name: subtask,
-		// 		id: newSubtasks.length,
-		// 	}
-		// 	setNewSubtasks(newSubtasks.concat([task]));
-		// 	setSubtask("");
-		// }
 	}
 
 	function removeSubtask(event){
