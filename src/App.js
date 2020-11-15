@@ -58,7 +58,7 @@ function App() {
     const newSubtasks = await fetchSubtasks();
     setSubtasks(newSubtasks);
 
-    const userAchievement = fetchAchievements().then((data) => {
+    const userAchievement = await fetchAchievements().then((data) => {
       return data.find((achievement) => {
         return achievement.user_id === userId;
       })

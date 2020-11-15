@@ -302,7 +302,7 @@ export default function AddTask(){
 				</div>
 				<div className="row justify-content-center">
 					<div className="form-group col-sm-2" style={{marginTop: "50px"}}>
-						<button type="submit" className="btn btn-primary" disabled={!fieldsFilled() && !submit}>
+						<button type="submit" className="btn btn-primary" disabled={!fieldsFilled() || submit}>
         					{submit ? "Loading..." : "Save"}
      	 				</button>
 					</div>
