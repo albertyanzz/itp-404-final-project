@@ -46,7 +46,7 @@ export default function AchievementPage(){
                       backgroundColor="green"
                       name="Getting hot"
                       maxProgress="50"
-                      progress={userAchievements.tasks_completed > 10 ? 10 : userAchievements.tasks_completed}
+                      progress={userAchievements.tasks_completed > 50 ? 50 : userAchievements.tasks_completed}
                   >
                       {"Complete 50 tasks"}
                   </AchievementItem>
@@ -58,7 +58,7 @@ export default function AchievementPage(){
                       backgroundColor="purple"
                       name="On fire!"
                       maxProgress="100"
-                      progress={userAchievements.tasks_completed > 10 ? 10 : userAchievements.tasks_completed}
+                      progress={userAchievements.tasks_completed > 100 ? 100 : userAchievements.tasks_completed}
                   >
                       {"Complete 100 tasks"}
                   </AchievementItem>
