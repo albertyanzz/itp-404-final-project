@@ -82,7 +82,7 @@ function App() {
     const subTasks = await fetchSubtasks();
 
     const filteredSubtasks = subTasks.filter((subtask) => {
-      return subtask.task_id = taskId;
+      return subtask.task_id === taskId;
     })
 
 		if(filteredSubtasks.length === 0){
