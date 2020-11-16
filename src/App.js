@@ -71,7 +71,7 @@ function App() {
 			tasks_completed: (userAchievement.tasks_completed+1),
 		});
 
-		fetchAchievements().then((data) => {
+		await fetchAchievements().then((data) => {
 			setAchievements(data);
 		})
   }
