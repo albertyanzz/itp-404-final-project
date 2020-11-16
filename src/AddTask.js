@@ -53,6 +53,7 @@ export default function AddTask(){
 		setSubmit(true);
 
 		if(!validForm()){
+			setSubmit(false);
 			return;
 		}
 
@@ -61,23 +62,32 @@ export default function AddTask(){
 			task_name: name,
 			deadline: deadline,
 			progress: 0,
-			total: newSubtasks.length,
+			total: newSubtasks.length > 0 ? newSubtasks.length : 1, //if no subtask, task itself is subtask
 			category_id: selectedCategory,
 		}
 
 		const newTaskId = await saveTask(newTask).then((data) => {
 			return data.id;
 		});
-		
-		var a_subtask;
-		for(a_subtask of newSubtasks){
-			const newSubtask = {
-				task_id: newTaskId,
-				subtask_name: a_subtask.name,
-			};
 
-			await saveSubtask(newSubtask);
+		if(newSubtasks.length === 0){
+			await saveSubtask({
+				task_id: newTaskId,
+				subtask_name: name,
+			})
 		}
+		else {
+			var a_subtask;
+			for(a_subtask of newSubtasks){
+				const newSubtask = {
+					task_id: newTaskId,
+					subtask_name: a_subtask.name,
+				};
+	
+				await saveSubtask(newSubtask);
+			}
+		}
+	
 
 		fetchTasks().then((data) => {
 			setTasks(data);
