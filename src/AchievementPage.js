@@ -29,9 +29,9 @@ export default function AchievementPage(){
             <div className="achievementsList">
                 <div className="achievementRow">
                   <AchievementItem
-                      icon={faTrophy}
+                      icon={faStar}
                       iconColor="yellow"
-                      backgroundColor="red"
+                      backgroundColor="green"
                       name="Task streak"
                       maxProgress="10"
                       progress={userAchievements.tasks_completed > 10 ? 10 : userAchievements.tasks_completed}
@@ -41,9 +41,9 @@ export default function AchievementPage(){
                 </div>
                 <div className="achievementRow">
                   <AchievementItem
-                      icon={faStar}
-                      iconColor="yellow"
-                      backgroundColor="green"
+                      icon={faFire}
+                      iconColor="red"
+                      backgroundColor="purple"
                       name="Getting hot"
                       maxProgress="50"
                       progress={userAchievements.tasks_completed > 50 ? 50 : userAchievements.tasks_completed}
@@ -53,10 +53,10 @@ export default function AchievementPage(){
                 </div>
                 <div className="achievementRow">
                   <AchievementItem
-                      icon={faFire}
-                      iconColor="red"
-                      backgroundColor="purple"
-                      name="On fire!"
+                      icon={faTrophy}
+                      iconColor="yellow"
+                      backgroundColor="red"
+                      name="Master tasker"
                       maxProgress="100"
                       progress={userAchievements.tasks_completed > 100 ? 100 : userAchievements.tasks_completed}
                   >

@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProgressBar from './ProgressBar'
 
-export default function AchievementItem({iconColor, icon, backgroundColor, maxProgress, progress, children: description}){
+export default function AchievementItem({iconColor, icon, name, backgroundColor, maxProgress, progress, children: description}){
 
     return(
         <div className="achievementItem">
@@ -10,7 +10,7 @@ export default function AchievementItem({iconColor, icon, backgroundColor, maxPr
                 <FontAwesomeIcon icon={icon} color={iconColor} size="2x" />
             </div>
             <div className="achievementDescription">
-                {description}
+                {`${name} - (${description})`}
             </div>
             <div className="progressBar">
                 <ProgressBar totalValue={maxProgress} currValue={progress}>
