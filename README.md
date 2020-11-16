@@ -6,6 +6,7 @@ Microplanner is a todo list web application that combines the ideas of microprod
 
 - [Netlify link](https://elastic-poincare-f4a4a3.netlify.app/)
 - [Heroku Repo](https://itp-404-final-project.herokuapp.com/)
+- [Github Repo](https://github.com/albertyanzz/itp-404-final-project)
 - [YouTube Demo](https://www.youtube.com/watch?v=cq4VGCYfi1E&feature=youtu.be)
 
 ![Api test results](/assets/testing-screenshot.png)
