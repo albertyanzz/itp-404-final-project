@@ -9,4 +9,6 @@ Microplanner is a todo list web application that combines the ideas of microprod
 - [Github Repo](https://github.com/albertyanzz/itp-404-final-project)
 - [YouTube Demo](https://www.youtube.com/watch?v=cq4VGCYfi1E&feature=youtu.be)
 
+(Note: Cookies have to be enabled for google login)
+
 ![Api test results](/assets/testing-screenshot.png)
