@@ -29,11 +29,12 @@ function App() {
   const [currUser, setCurrUser] = useState(null);
   const [userName, setUserName] = useState("");
   const [userId, setUserId] = useState(null);
-
   const [tasks, setTasks] = useState([]);
   const [subtasks, setSubtasks] = useState([]);
   const [achievements, setAchievements] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [deleting, setDeleting] = useState(false);
+
 
   function createSuccessNotification(title, message){
     store.addNotification({
@@ -45,16 +46,30 @@ function App() {
       animationIn: ["animate__animated", "animate__fadeIn"],
       animationOut: ["animate__animated", "animate__fadeOut"],
       dismiss: {
-      duration: 1000,
+        duration: 1000,
+      }
+    });
+  }
+
+  function createInfoNotification(title, message){
+    store.addNotification({
+      title: title,
+      message: message,
+      type: "info",
+      insert: "top",
+      container: "top-right",
+      animationIn: ["animate__animated animate__fadeIn"],
+      animationOut: ["animate__animated animate__fadeOut"],
+      dismiss: {
+        duration: 1000,
       }
     });
   }
 
 
   async function deleteSubtask(id, taskId){
+    createInfoNotification("Deleting subtask", "Wait for it...")
     await destroySubtask(id);
-    updateTaskProgress(taskId);
-    createSuccessNotification("Subtask completed!", "Woohoo!");
 
     const newSubtasks = await fetchSubtasks();
     setSubtasks(newSubtasks);
@@ -72,8 +87,12 @@ function App() {
 		});
 
 		await fetchAchievements().then((data) => {
-			setAchievements(data);
-		})
+      setAchievements(data);
+      createSuccessNotification("Subtask completed!", "Woohoo!");
+      setDeleting(false);
+    })
+    
+    updateTaskProgress(taskId);
   }
 
   async function updateTaskProgress(taskId){
@@ -103,7 +122,7 @@ function App() {
 				total: prevTask.total,
 				category_id: prevTask.category_id,
 			})
-		}
+    }
   }
 
   useEffect(() => {
@@ -142,6 +161,8 @@ function App() {
         deleteSubtask,
         createSuccessNotification,
         updateTaskProgress,
+        deleting,
+        setDeleting,
       }}
     >
       <Router>

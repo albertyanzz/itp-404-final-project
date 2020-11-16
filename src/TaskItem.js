@@ -9,7 +9,7 @@ import { fetchSubtasks } from './api';
 
 
 export default function TaskItem({name, maxProgress, progress, dueDate, subtasks, id}){
-	const { deleteSubtask } = useContext(DataStoreContext);
+	const { deleteSubtask, setDeleting } = useContext(DataStoreContext);
 	const [showSubTask, setShowSubTask] = useState(false);
 	const [taskSubtasks, setTaskSubtasks] = useState([]);
 	const [progressBar, setProgressBar] = useState([]);
@@ -33,6 +33,7 @@ export default function TaskItem({name, maxProgress, progress, dueDate, subtasks
 		setTaskSubtasks([]);
 
 		function removeSubtask(id, taskId){
+			setDeleting(true);
 			setCurrProgress(currProgress+1);
 			deleteSubtask(id, taskId);
 		}
@@ -59,7 +60,7 @@ export default function TaskItem({name, maxProgress, progress, dueDate, subtasks
 				}
 			</ProgressBar>
 		]);
-	}, [subtasks, deleteSubtask, progress, maxProgress, name, currProgress, id]);
+	}, [subtasks, deleteSubtask, progress, maxProgress, name, currProgress, id, setDeleting]);
 
 
 	return (

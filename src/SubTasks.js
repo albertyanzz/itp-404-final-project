@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { DataStoreContext } from "./contexts";
 
 export default function SubTasks({name, id, taskId, removeSubtask}){
 
     const [taskCompleted, setTaskCompleted] = useState(false);
+    const { deleting } = useContext(DataStoreContext);
 
     async function completeTask(){
         setTaskCompleted(true);
@@ -24,9 +26,9 @@ export default function SubTasks({name, id, taskId, removeSubtask}){
                 {name}
             </div>
         
-            <div className="w3-button" onClick={completeTask}>
+            <button className="w3-button" disabled={deleting} onClick={completeTask}>
                 <FontAwesomeIcon icon={faCheckSquare} color="black" size="2x" />
-            </div>
+            </button>
         </div>
   );
 }
