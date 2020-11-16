@@ -50,6 +50,7 @@ function App() {
     });
   }
 
+
   async function deleteSubtask(id, taskId){
     await destroySubtask(id);
     updateTaskProgress(taskId);
@@ -63,10 +64,6 @@ function App() {
         return achievement.user_id === userId;
       })
     })
-
-		// const userAchievement = achievements.find((achievement) => {
-		// 	return achievement.user_id === userId;
-		// })
 
 		await saveAchievement({
 			id: userAchievement.id,
