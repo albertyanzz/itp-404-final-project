@@ -110,11 +110,11 @@ export default function Home() {
       <motion.div
         className="row homeFont homeItem"
         initial={{ y: -100, opacity: 0.1 }}
-		animate={{ y: [-60, -30, -10, -5, -1, -0.5, 0], opacity: 1 }}
-		transition={{
-			ease: 'easeIn',
-			duration: 1,
-		}}
+        animate={{ y: [-60, -30, -10, -5, -1, -0.5, 0], opacity: 1 }}
+        transition={{
+          ease: "easeIn",
+          duration: 1,
+        }}
       >
         Microplanner
       </motion.div>

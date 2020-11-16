@@ -9,9 +9,9 @@ import CalendarExport from "./CalendarExport";
 import PageNotFound from "./PageNotFound";
 import PopUpMenu from "./PopUpMenu";
 import { DataStoreContext } from "./contexts";
-import ReactNotification from 'react-notifications-component';
-import 'react-notifications-component/dist/theme.css';
-import { store } from 'react-notifications-component';
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+import { store } from "react-notifications-component";
 import {
   fetchTasks,
   fetchCategories,
@@ -35,8 +35,7 @@ function App() {
   const [categories, setCategories] = useState([]);
   const [deleting, setDeleting] = useState(false);
 
-
-  function createSuccessNotification(title, message){
+  function createSuccessNotification(title, message) {
     store.addNotification({
       title: title,
       message: message,
@@ -47,11 +46,11 @@ function App() {
       animationOut: ["animate__animated", "animate__fadeOut"],
       dismiss: {
         duration: 1000,
-      }
+      },
     });
   }
 
-  function createInfoNotification(title, message){
+  function createInfoNotification(title, message) {
     store.addNotification({
       title: title,
       message: message,
@@ -62,13 +61,12 @@ function App() {
       animationOut: ["animate__animated animate__fadeOut"],
       dismiss: {
         duration: 1000,
-      }
+      },
     });
   }
 
-
-  async function deleteSubtask(id, taskId){
-    createInfoNotification("Deleting subtask", "Wait for it...")
+  async function deleteSubtask(id, taskId) {
+    createInfoNotification("Deleting subtask", "Wait for it...");
     await destroySubtask(id);
 
     const newSubtasks = await fetchSubtasks();
@@ -77,25 +75,25 @@ function App() {
     const userAchievement = await fetchAchievements().then((data) => {
       return data.find((achievement) => {
         return achievement.user_id === userId;
-      })
-    })
+      });
+    });
 
-		await saveAchievement({
-			id: userAchievement.id,
-			user_id: userId,
-			tasks_completed: (userAchievement.tasks_completed+1),
-		});
+    await saveAchievement({
+      id: userAchievement.id,
+      user_id: userId,
+      tasks_completed: userAchievement.tasks_completed + 1,
+    });
 
-		await fetchAchievements().then((data) => {
+    await fetchAchievements().then((data) => {
       setAchievements(data);
       createSuccessNotification("Subtask completed!", "Woohoo!");
       setDeleting(false);
-    })
-    
+    });
+
     updateTaskProgress(taskId);
   }
 
-  async function updateTaskProgress(taskId){
+  async function updateTaskProgress(taskId) {
     const prevTask = await fetchTask(taskId);
 
     // extra failproof
@@ -103,25 +101,26 @@ function App() {
 
     const filteredSubtasks = subTasks.filter((subtask) => {
       return subtask.task_id === taskId;
-    })
+    });
 
-		if(filteredSubtasks.length === 0){
+    if (filteredSubtasks.length === 0) {
       destroyTask(taskId);
       createSuccessNotification("You finished a task!", "Let's gooo!");
-			setTasks(tasks.filter((task) => {
-				return task.id !== taskId;
-			}))
-		}
-		else {
-			await saveTask({
-				id: taskId,
-				user_id: prevTask.user_id,
-				task_name: prevTask.task_name,
-				deadline: prevTask.deadline,
-				progress: (prevTask.total - filteredSubtasks.length),
-				total: prevTask.total,
-				category_id: prevTask.category_id,
-			})
+      setTasks(
+        tasks.filter((task) => {
+          return task.id !== taskId;
+        })
+      );
+    } else {
+      await saveTask({
+        id: taskId,
+        user_id: prevTask.user_id,
+        task_name: prevTask.task_name,
+        deadline: prevTask.deadline,
+        progress: prevTask.total - filteredSubtasks.length,
+        total: prevTask.total,
+        category_id: prevTask.category_id,
+      });
     }
   }
 
@@ -130,7 +129,7 @@ function App() {
       fetchAchievements(),
       fetchCategories(),
       fetchTasks(),
-      fetchSubtasks()
+      fetchSubtasks(),
     ]).then(([achievements, categories, tasks, subtasks]) => {
       setTasks(tasks);
       setAchievements(achievements);

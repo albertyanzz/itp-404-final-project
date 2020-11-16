@@ -1,25 +1,30 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
-export default function MenuItem({iconColor, icon, backgroundColor, linkTo, tag}){
+export default function MenuItem({
+  iconColor,
+  icon,
+  backgroundColor,
+  linkTo,
+  tag,
+}) {
+  function showTag() {
+    document.getElementById(`${tag}-tag`).style.display = "block";
+  }
 
-	function showTag(){
-		document.getElementById(`${tag}-tag`).style.display="block"
-	}
+  function hideTag() {
+    document.getElementById(`${tag}-tag`).style.display = "none";
+  }
 
-	function hideTag(){
-		document.getElementById(`${tag}-tag`).style.display="none"
-	}
-
-	return (
-	<motion.div 
-		className="menuItem"
-		whileHover={{
-			scale: 1.1,
-		}}
-	>
+  return (
+    <motion.div
+      className="menuItem"
+      whileHover={{
+        scale: 1.1,
+      }}
+    >
       <Link
         to={linkTo}
         onMouseOut={hideTag}

@@ -1,20 +1,20 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { createPortal } from "react-dom";
 
 export default function AddCategoryModal({ onClose, saveCategory }) {
-    const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("");
 
-    function onSave(){
-			if(category !== ""){
-				saveCategory(category);
-			}
-		}
-		
-		function handleCategoryChange(event){
-			setCategory(event.target.value);
-		}
+  function onSave() {
+    if (category !== "") {
+      saveCategory(category);
+    }
+  }
 
-    return createPortal(
+  function handleCategoryChange(event) {
+    setCategory(event.target.value);
+  }
+
+  return createPortal(
     <>
       <div className="modal-backdrop show"></div>
       <div className="modal" tabIndex="-1" style={{ display: "block" }}>
@@ -33,13 +33,13 @@ export default function AddCategoryModal({ onClose, saveCategory }) {
               </button>
             </div>
             <div className="modal-body">
-							<input
-								type="text"
-								value={category}
-								onChange={handleCategoryChange}
-								className="form-control"
-								id="newCategory"
-							/>
+              <input
+                type="text"
+                value={category}
+                onChange={handleCategoryChange}
+                className="form-control"
+                id="newCategory"
+              />
             </div>
             <div className="modal-footer">
               <button
@@ -53,8 +53,8 @@ export default function AddCategoryModal({ onClose, saveCategory }) {
               <button
                 type="button"
                 className="btn btn-primary"
-								onClick={onSave}
-								data-dismiss="modal"
+                onClick={onSave}
+                data-dismiss="modal"
                 disabled={category === ""}
               >
                 Save
@@ -63,8 +63,7 @@ export default function AddCategoryModal({ onClose, saveCategory }) {
           </div>
         </div>
       </div>
-
     </>,
     document.getElementById("modal-container")
-    );
+  );
 }

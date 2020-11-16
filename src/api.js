@@ -76,22 +76,21 @@ export function fetchAchievement(id) {
   });
 }
 
-
 export function destroyTask(id) {
   return fetch(`/api/tasks/${id}`, {
-    method: "DELETE"
+    method: "DELETE",
   });
 }
 
 export function destroySubtask(id) {
   return fetch(`/api/subtasks/${id}`, {
-    method: "DELETE"
+    method: "DELETE",
   });
 }
 
 export function destroyCategory(id) {
   return fetch(`/api/categories/${id}`, {
-    method: "DELETE"
+    method: "DELETE",
   });
 }
 
